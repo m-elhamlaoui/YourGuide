@@ -14,9 +14,11 @@ Fonctionnalités Clés
 Lorsqu'un visiteur choisit une ville sur YourGuide, la plateforme charge instantanément une page présentant une liste de profils de guides disponibles dans cette destination. Chaque profil offre un aperçu du nom,sexe,age,et les langues parlés par le guide, permettant ainsi au visiteur de parcourir facilement les différentes options.
 Cette approche intuitive simplifie le processus de sélection du guide idéal, offrant aux visiteurs la possibilité de personnaliser leur expérience de voyage selon leurs préférences.
 
+![WhatsApp Image 2024-03-24 at 21 13 19](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/502c1a9d-89bb-426e-bcbe-b4bde1be5f01)
+
+
 exemple des guide disponible dans Casablanca et Rabat
 
-![WhatsApp Image 2024-03-24 at 21 13 19](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/502c1a9d-89bb-426e-bcbe-b4bde1be5f01)
 
 
 ![Screenshot (478)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/9835a18b-55be-4d8e-b648-608689c0e177)
