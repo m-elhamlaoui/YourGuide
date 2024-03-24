@@ -39,6 +39,8 @@ Sur YourGuide, les guides doivent d'abord créer des comptes sécurisés pour ê
 
 La fonction de modification de profil sur YourGuide offre aux guides la souplesse nécessaire pour ajuster leurs informations selon l'évolution de leurs disponibilités et de leurs compétences. En quelques clics, les guides peuvent mettre à jour des détails tels que leur tarif, les langues parlées et leur photo de profil. Cette fonctionnalité assure que les profils demeurent précis et pertinents, offrant ainsi aux utilisateurs une expérience de recherche de guide fluide et fiable. En permettant aux guides de maintenir leurs informations à jour, YourGuide garantit aux voyageurs une connexion avec des guides locaux authentiques et toujours prêts à offrir une expérience de qualité.
 
+![Screenshot (481)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/302dd3cc-4192-4e1f-a105-edfa1d516064)
+
 
 
 Dans ce projet nous avons travaillé avec postgresql, nous avons creé deux base se données users et ville:
