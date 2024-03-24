@@ -27,6 +27,9 @@ exemple des guide disponible dans Casablanca et Rabat
 ![Screenshot (477)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/0ac5dcb4-dcdd-4426-a9ab-9e24d9701d7d)
 
 
+Lorsque le visiteur clique sur le profil du guide , un popup affichant les informations du guide s'ouvre:
+
+![image](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/9dff6ffd-0f17-4033-8ef7-28b6c829989c)
 
 2.Authentification du Guide:
 
