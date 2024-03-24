@@ -1,4 +1,4 @@
-# YourGuide
+# YourGuide projet réalisé par: Hamza Khattabi , Imane ElGhouat , Zineb Choukrani et Yassamine Zmir
 
 YourGuide
 
@@ -16,6 +16,9 @@ Cette approche intuitive simplifie le processus de sélection du guide idéal, o
 
 exemple des guide disponible dans Casablanca et Rabat
 
+![WhatsApp Image 2024-03-24 at 21 13 19](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/502c1a9d-89bb-426e-bcbe-b4bde1be5f01)
+
+
 ![Screenshot (478)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/9835a18b-55be-4d8e-b648-608689c0e177)
 
 
@@ -26,6 +29,8 @@ exemple des guide disponible dans Casablanca et Rabat
 2.Authentification du Guide:
 
 Sur YourGuide, les guides doivent d'abord créer des comptes sécurisés pour être intégrés à notre base de données. Lors de cette inscription, ils fournissent des informations essentielles telles que leur nom, âge, sexe, les langues qu'ils parlent, leur tarif de service et ajoutent une photo de profil. Cette procédure garantit aux utilisateurs un accès à des profils complets et authentiques, renforçant ainsi la confiance et la qualité de l'expérience proposée.
+
+![WhatsApp Image 2024-03-24 at 21 13 25](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/18ed5752-a141-4042-84d7-c02e78b20537)
 
 
 3.Modification du profil: 
