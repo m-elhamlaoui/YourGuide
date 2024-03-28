@@ -14,17 +14,19 @@ Fonctionnalités Clés
 Lorsqu'un visiteur choisit une ville sur YourGuide, la plateforme charge instantanément une page présentant une liste de profils de guides disponibles dans cette destination. Chaque profil offre un aperçu du nom,sexe,age,et les langues parlés par le guide, permettant ainsi au visiteur de parcourir facilement les différentes options.
 Cette approche intuitive simplifie le processus de sélection du guide idéal, offrant aux visiteurs la possibilité de personnaliser leur expérience de voyage selon leurs préférences.
 
-![WhatsApp Image 2024-03-24 at 21 13 19](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/502c1a9d-89bb-426e-bcbe-b4bde1be5f01)
+On trouve premièrement la page Home:
+![Screenshot (488)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/9e330c66-e74c-4fcb-98f1-9ee9ef91612f)
 
 
-exemple des guide disponible dans Casablanca et Rabat
+Puis il choisit soit dans le dropdown, soit dans la barre de recherche sa destination:
+![Screenshot (493)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/e16b1295-aaeb-4d35-9944-938f2c7a9ad4)
 
 
+exemple des guides disponibles dans la ville Rabat:
+![Screenshot (478)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/12e0cf73-505f-4405-b681-99a2a60f367e)
 
-![Screenshot (478)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/9835a18b-55be-4d8e-b648-608689c0e177)
-
-
-![Screenshot (477)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/0ac5dcb4-dcdd-4426-a9ab-9e24d9701d7d)
+ou bien dans la ville Casablanca: 
+![Screenshot (477)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/4cbf97f1-3bd6-4004-bdb8-c74e166abd3e)
 
 
 Lorsque le visiteur clique sur le profil du guide , un popup affichant les informations du guide s'ouvre:
@@ -35,14 +37,19 @@ Lorsque le visiteur clique sur le profil du guide , un popup affichant les infor
 
 Sur YourGuide, les guides doivent d'abord créer des comptes sécurisés pour être intégrés à notre base de données. Lors de cette inscription, ils fournissent des informations essentielles telles que leur nom, âge, sexe, les langues qu'ils parlent, leur tarif de service et ajoutent une photo de profil. Cette procédure garantit aux utilisateurs un accès à des profils complets et authentiques, renforçant ainsi la confiance et la qualité de l'expérience proposée.
 
-![WhatsApp Image 2024-03-24 at 21 13 25](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/18ed5752-a141-4042-84d7-c02e78b20537)
+Pour la partie authentification du guide:
+![Screenshot (490)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/862b4b6b-27b4-41a4-98d9-057c5e1ffa5c)
 
+Après avoir remplir le form d'authentification, ses informations s'ajoutent dans notre base de donnée, et s'affichent aindi pour le visiteur après avoir choisir sa destination.
+Une fois l'authentification est terminé, une page de Login s'affiche:
+
+![Screenshot (489)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/54ffc8b2-028d-4941-8584-d14c09b66a1f)
 
 3.Modification du profil: 
 
 La fonction de modification de profil sur YourGuide offre aux guides la souplesse nécessaire pour ajuster leurs informations selon l'évolution de leurs disponibilités et de leurs compétences. En quelques clics, les guides peuvent mettre à jour des détails tels que leur tarif, les langues parlées et leur photo de profil. Cette fonctionnalité assure que les profils demeurent précis et pertinents, offrant ainsi aux utilisateurs une expérience de recherche de guide fluide et fiable. En permettant aux guides de maintenir leurs informations à jour, YourGuide garantit aux voyageurs une connexion avec des guides locaux authentiques et toujours prêts à offrir une expérience de qualité.
 
-![Screenshot (481)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/302dd3cc-4192-4e1f-a105-edfa1d516064)
+![Screenshot (491)](https://github.com/m-elhamlaoui/YourGuide/assets/113773004/0281b3a0-7827-4eb6-95ad-d045f359ebb3)
 
 
 
