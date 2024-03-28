@@ -1,0 +1,158 @@
+body {
+            background-size: cover;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8); /* Couleur de fond de la barre de navigation avec transparence */
+            position: fixed; /* Barre de navigation fixée en haut de la page */
+            width: 100%; /* Barre de navigation occupant toute la largeur */
+            top: 0; /* Alignement en haut de la page */
+            z-index: 1000; /* Z-index élevé pour être au-dessus du contenu */
+        }
+
+        .navbar-brand img {
+            width: 70px;
+            height: auto;
+            border-radius: 25px;
+            margin-left: 20px; /* Marge à gauche pour le logo */
+        }
+
+        #guide {
+            text-align: left; /* Alignement du texte à gauche */
+            margin-top: 80px; /* Marge en haut pour éviter que le contenu soit caché par la barre de navigation */
+        }
+#guide p { 
+font-size: 20px;
+text-align:center;
+border-radius: 5px;
+            margin-bottom: 50px; /* Marge en bas du paragraphe */
+        }
+        #guideProfiles {
+        
+            display: inline-block; /* Affichage en ligne pour permettre un positionnement horizontal */
+            margin-left: 200px; /* Marge à droite pour les guides */
+        }
+       
+        h1, h3 {
+            margin-top: 20px; /* Marge en haut pour éviter que le contenu soit caché par la barre de navigation */
+            margin-left: 0px;
+            text-align: center;
+        }
+
+        /* Style du popup */
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.9); /* Fond blanc semi-transparent */
+            z-index: 1000; /* Au-dessus de tout le reste */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white; /* Fond blanc */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+
+       /* Style du popup */
+.popup-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* Fond blanc semi-transparent */
+    z-index: 1000; /* Au-dessus de tout le reste */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white; /* Fond blanc */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    position: relative; /* Position relative pour positionner les boutons à l'intérieur */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#comment {
+    margin-bottom: 10px; /* Marge en bas du texte area */
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+       
+.navbar-nav{
+	margin-right:auto;
+}
+.btn{
+	margin-left:500px;
+}
+.content-box {
+       background-color: rgba(240, 240, 240, 0.5); /* Semi-transparent background color */
+           padding: 20px; /* Padding around the content inside the box */
+    border-radius: 10px; /* Rounded corners for the box */
+    max-width: 700px;
+    max-height:150px; /* Maximum width of the box */
+    margin: 0 auto; /* Center the box horizontally */
+    margin-bottom:20px;
+}
+/* Container for the profiles */
+.profile-container {
+    display: flex; /* Display the profiles side by side */
+    flex-wrap: wrap; /* Wrap profiles to the next line if necessary */
+    justify-content: center; /* Center-align profiles horizontally */
+    margin-top: 20px; /* Adjust margin as needed */
+}
+
+/* Profile card styling */
+.profile-card {
+    width: 200px; /* Adjust profile card width as needed */
+    margin: 10px; /* Adjust margin between profile cards */
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-size: 20px;
+    margin-top: 10px;
+    color: black;
+    background-color: #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+

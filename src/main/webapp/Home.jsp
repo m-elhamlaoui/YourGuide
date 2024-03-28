@@ -1,64 +1,156 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.JAVA.Beans.User" %>
 <%@ page import="com.JAVA.DAO.UserDAO" %>
 <%@ page import="com.JAVA.DAO.VilleDAO" %>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Votre titre ici</title>
-<script>
-function getGuidesByCity() {
-    var selectedCity = document.getElementById("cities").value;
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "GuideServlet?ville=" + selectedCity, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            document.getElementById("guidesList").innerHTML = xhr.responseText;
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title>Sign Up Form</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.24/angular-material.min.css">
+    <style>
+        /* CSS for body background */
+        body {
+            background-image: url('ressources/img/img2.jpg'); /* Replace 'path/to/background-image.jpg' with your image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0; /* Remove default body margin */
+            padding: 0; /* Remove default body padding */
         }
-    };
-    xhr.send();
-}
 
+        /* CSS for header layout */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: rgba(235, 229, 224, 0.8); /* Semi-transparent background for better readability */
+        }
 
-</script>
-</head>
-<body>
-<nav>
-    <a href="#home">Home</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <!-- Ajoutez d'autres liens de navigation si nécessaire -->
-    
-    <!-- Bouton de déconnexion -->
-    <form action="LogoutServlet" method="get" class="logout">
-        <button type="submit">Logout</button>
-    </form>
-</nav>
-<div>
-<h2>YourGuide dans votre voyage</h2>
-<div>
-<h1>Ville</h1>
-<select id="cities">
-<option>Choisissez une ville</option>
-    <% 
-        VilleDAO villeDAO = new VilleDAO();
-        List<String> villes = villeDAO.getAllVilles();
-        for (String ville : villes) { 
-    %>
-        <option><%= ville %></option>
-    <% } %>
-</select>
+        .logo {
+            height: 40px; /* Adjust height as needed */
+        }
+
+        .navigation-links ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .navigation-links ul li {
+            margin-left: 10px;
+        }
+
+        .search-bar input[type="text"] {
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* CSS for displaying cities as cards */
+        .cities-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        
+
+        .city-card:hover {
+            transform: scale(1.05); /* Increase card size on hover */
+        }
+        /* Style for anchor tag */
+    .city-link {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Inherit text color from parent */
+    }
+
+    /* Style for city card */
+    .city-card {
+        width: 200px;
+        height: 100px;
+        margin: 40px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #7E7E7E;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+        display: flex; /* Use flexbox for centering */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+        
+
+    }
+
+    /* Style for city name */
+    .city-name {
+        text-align: center; /* Center text */
+    }
+    </style>
+</h:head>
+<h:body ng-app="MyApp" ng-controller="DemoCtrl" ng-cloak>
+   <div class="header">
+       <img src="ressources/img/logo.jpg" alt="Logo" class="logo">
+       <div class="navigation-links">
+           <ul>
+               <li><a href="Home.jsp">Home</a></li>
+               <li><a href="#">Contact</a></li>
+               <li class="search-bar"> 
+               <form action="Guide.jsp" method="get" style="margin-left: 80px; padding:5px;">
+            <input type="text" style="margin-left: 80px; padding:8px;" id="ville" name="ville" placeholder="Rechercher par titre... ">
+        </form>
+        </li>
+               <li><button type="button" class="btn btn-secondary" onclick="window.location.href='ViewProfile.jsp'">Je suis un guide</button>
+               </li>
+           </ul>
+       </div>
+   </div>
+
+   <div class="cities-container">
+    <div>
+    <div style="background-color: rgba(235, 229, 224, 0.8); padding: 20px; text-align: center; margin: 15%;border-radius: 3px; margin-top:90px;">
+        <p style="font-style: italic; color: #63492B;">Explorez le Maroc avec un guide dedie a vos cotes</p>
+        <p style="color: #000000;">Accordez-vous le luxe d'un voyage sur mesure avec des guides locaux passionnes, prets a partager leurs connaissances et a vous immerger dans la culture de chaque destination. Ensemble, creons des souvenirs qui transcendent les frontieres et faconnent des experiences uniques. Bienvenue dans un monde de voyages personnalises, ou chaque instant devient une histoire a raconter.</p>
+         <h1 style="margin-top:150px;font-style: italic; color: #63492B;">Choisissez votre destination</h1>
+        <form action="Guide.jsp" method="get" style="display: flex; flex-direction: column; max-width:200px; width:100%; margin-left:400px;" >
+    <select name="ville" style="margin-bottom: 10px;">
+        <option>Choisissez une ville</option>
+        <% 
+            VilleDAO villeDAO = new VilleDAO();
+            List<String> villes = villeDAO.getAllVilles();
+            for (String ville : villes) { 
+        %>
+            <option><%= ville %></option>
+        <% } %>
+    </select>
+    <button type="submit">Afficher Guides</button>
+</form>
+
+    </div>
+   
 </div>
-<div>
-<button onclick="getGuidesByCity()">Afficher Guides</button>
-
 </div>
-<div id="guidesList"></div>
 
-
-</div>
-</body>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-messages.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-animate.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-aria.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-material/1.1.24/angular-material.min.js"></script>
+   <script>
+       angular.module('MyApp', ['ngMaterial', 'ngMessages']).controller('DemoCtrl', function ($scope, $http) {
+           
+         
+       });
+   </script>
+</h:body>
 </html>

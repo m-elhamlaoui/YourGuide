@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,15 +19,15 @@ public class UserDAO {
     private String jdbcPassword = "Zinebch12@";
     private String jdbcDriver = "org.postgresql.Driver";
 
-    private static final String INSERT_USER_SQL = "INSERT INTO users" + "(name, email, password, sexe, age, ville, tel) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String INSERT_USER_SQL = "INSERT INTO users" + "(name, email, password, sexe, age, ville, tel,picture,langue,tarif) VALUES (?, ?, ?, ?, ?, ?, ?,?,?,?)";
     private static final String SELECT_ALL_CITIES_SQL = "SELECT DISTINCT ville FROM users";
-    private static final String SELECT_USER_BY_ID = "SELECT id, name, email, password, sexe, age, ville, tel FROM users WHERE id = ?";
+    private static final String SELECT_USER_BY_ID = "SELECT id, name, email, password, sexe, age, ville, tel,picture,langue,tarif FROM users WHERE id = ?";
     private static final String SELECT_ALL_USERS = "SELECT * FROM users";
     private static final String DELETE_USER_SQL = "DELETE FROM users WHERE id=?";
-    private static final String UPDATE_USER_SQL = "UPDATE users SET name=?, email=?, password=?, sexe=?, age=?, ville=?, tel=? WHERE id=?";
+    private static final String UPDATE_USER_SQL = "UPDATE users SET name=?, email=?, password=?, sexe=?, age=?, ville=?, tel=?,picture=?,langue=?,tarif=? WHERE id=?";
     private static final String SQL_SELECT_BY_EMAIL = "SELECT id, name, password, email FROM users WHERE email = ?";
-    private static final String SELECT_GUIDES_BY_CITY_SQL = "SELECT name,email,sexe,tel,age FROM users WHERE ville = ?";
     private static final String GUIDES_EXIST_IN_CITY_SQL = "SELECT COUNT(*) FROM users WHERE ville = ?";
+    private static final String SELECT_ALL_LANGUAGES_SQL = "SELECT DISTINCT langue FROM users";
 
     public UserDAO() {
 
@@ -91,35 +92,54 @@ public class UserDAO {
             preparedStatement.setString(6, user.getVille());
             preparedStatement.setString(7, user.getTel());
 
+            preparedStatement.setBytes(8, user.getPicture());
+         
+            preparedStatement.setString(9, user.getLangue()); // Set the comma-separated string in the PreparedStatement
+            preparedStatement.setInt(10, user.getTarif());
+
             preparedStatement.executeUpdate();
         }
         
     }
-    public List<User> getGuidesByCity(String ville) throws DAOException {
+    public List<User> getGuidesByCity(String city) throws DAOException {
         List<User> guides = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
 
-        try (Connection connection = getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_GUIDES_BY_CITY_SQL)) {
+        try {
+            connection = getConnection();
+            String query = "SELECT * FROM users WHERE ville = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, city);
+            resultSet = statement.executeQuery();
 
-            preparedStatement.setString(1, ville);
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String sexe = resultSet.getString("sexe");
+                String age = resultSet.getString("age");
+                String ville = resultSet.getString("ville");
+                String tel = resultSet.getString("tel");
+                byte[] picture = resultSet.getBytes("picture");
+             // Récupération de la liste de langues
+                String langue = resultSet.getString("langue");
 
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    User guide = new User();
-                    guide.setName(resultSet.getString("name"));
-                    guide.setEmail(resultSet.getString("email"));
-                    guide.setTel(resultSet.getString("tel"));
-                    guide.setSexe(resultSet.getString("sexe"));
-                    
-                    guides.add(guide);
-                }
+                int tarif = resultSet.getInt("tarif");
+                User guide = new User(id, name, email, password, sexe, age, ville, tel, picture, langue,tarif);
+                guides.add(guide);
             }
         } catch (SQLException e) {
             throw new DAOException("Error retrieving guides by city: " + e.getMessage(), e);
+        } finally {
+            close(resultSet, statement, connection);
         }
 
         return guides;
     }
+
     public User selectUser(int id) {
         User user = null;
         try (Connection connection = getConnection();
@@ -136,7 +156,13 @@ public class UserDAO {
                 String ville = rs.getString("ville");
                 String tel = rs.getString("tel");
 
-                user = new User(id, name, email, password, sexe, age, ville, tel);
+                byte[] picture = rs.getBytes("picture");
+                String langues = rs.getString("langues");
+
+             
+                int tarif = rs.getInt("tarif");
+                
+                user=new User(id, name, email, password, sexe, age, ville, tel, picture, langues,tarif);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -159,14 +185,20 @@ public class UserDAO {
                 String age = rs.getString("age");
                 String ville = rs.getString("ville");
                 String tel = rs.getString("tel");
+                byte[] picture = rs.getBytes("picture");
+                String langues = rs.getString("langues");
 
-                users.add(new User(id, name, email, password, sexe, age, ville, tel));
+                
+                int tarif=rs.getInt("tarif");
+                
+                users.add(new User(id, name, email, password, sexe, age, ville, tel, picture, langues,tarif));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return users;
     }
+
 
     public boolean updateUser(User user) throws SQLException {
         boolean rowUpdated;
@@ -180,7 +212,8 @@ public class UserDAO {
             statement.setString(6, user.getVille());
             statement.setString(7, user.getTel());
             statement.setInt(8, user.getId());
-
+            statement.setBytes(9, user.getPicture());;
+            statement.setInt(10, user.getTarif());
             rowUpdated = statement.executeUpdate() > 0;
         }
         return rowUpdated;
@@ -238,6 +271,90 @@ public class UserDAO {
             statement.setInt(1, id);
             rowDeleted = statement.executeUpdate() > 0;
         }
+       
         return rowDeleted;
+    }
+    protected void close(ResultSet resultSet, PreparedStatement statement, Connection connection) {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                // Gérer l'exception ou afficher un message d'erreur
+                e.printStackTrace();
+            }
+        }
+        if (statement != null) {
+            try {
+                statement.close();
+            } catch (SQLException e) {
+                // Gérer l'exception ou afficher un message d'erreur
+                e.printStackTrace();
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                // Gérer l'exception ou afficher un message d'erreur
+                e.printStackTrace();
+            }
+        }
+    }
+    public Set<String> getAllLanguages() throws DAOException {
+        Set<String> languages = new HashSet<>();
+
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_LANGUAGES_SQL);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+                // Supposons que les langues soient stockées dans une colonne nommée "langue"
+                languages.add(resultSet.getString("langue"));
+            }
+        } catch (SQLException e) {
+            throw new DAOException("Error retrieving all languages: " + e.getMessage(), e);
+        }
+
+        return languages;
+    }
+    public User getUserById(int id) throws DAOException {
+        User user = null;
+        try (Connection connection = getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID)) {
+            preparedStatement.setInt(1, id);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    // Log pour indiquer que l'utilisateur a été trouvé dans la base de données
+                    System.out.println("Utilisateur trouvé dans la base de données avec l'ID : " + id);
+                    // Extraction des données de l'utilisateur
+                    user = extractUser(resultSet);
+                } else {
+                    // Log pour indiquer que l'utilisateur n'a pas été trouvé dans la base de données avec l'ID spécifié
+                    System.out.println("Aucun utilisateur trouvé dans la base de données avec l'ID : " + id);
+                }
+            }
+        } catch (SQLException e) {
+            // Log pour indiquer une exception lors de la récupération de l'utilisateur par ID
+            System.out.println("Erreur lors de la récupération de l'utilisateur par ID : " + e.getMessage());
+            throw new DAOException("Error retrieving user by ID: " + e.getMessage(), e);
+        }
+        return user;
+    }
+
+    private User extractUser(ResultSet resultSet) throws SQLException {
+        int id = resultSet.getInt("id");
+        String name = resultSet.getString("name");
+        String email = resultSet.getString("email");
+        String password = resultSet.getString("password");
+        String sexe = resultSet.getString("sexe");
+        String age = resultSet.getString("age");
+        String ville = resultSet.getString("ville");
+        String tel = resultSet.getString("tel");
+        byte[] picture = resultSet.getBytes("picture");
+        String langues = resultSet.getString("langues");
+        
+         int tarif=resultSet.getInt("tarif");
+        
+        return new User(id, name, email, password, sexe, age, ville, tel, picture, langues,tarif);
     }
 }
